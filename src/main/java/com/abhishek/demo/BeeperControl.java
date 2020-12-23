@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 import static java.util.concurrent.TimeUnit.*;
+
 class BeeperControl {
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(1);
