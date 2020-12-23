@@ -34,3 +34,4 @@ build/
 
 ### OTHER PROJECT FILES ###
 /db
+/logs
