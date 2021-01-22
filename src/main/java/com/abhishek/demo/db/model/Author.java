@@ -1,5 +1,6 @@
 package com.abhishek.demo.db.model;
 
+import com.abhishek.demo.db.converter.StringEncryptedAttributeConverter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Author extends BaseEntity {
     @Column(name = "dob")
     private Date dob;
 
+    @Convert(converter = StringEncryptedAttributeConverter.class)
     private String accountNumber;
 
 //    @Transient
