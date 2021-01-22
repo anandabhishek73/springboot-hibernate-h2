@@ -59,7 +59,7 @@ public abstract class EncryptedAttributeConverter<X> implements AttributeConvert
         }
 
         @Override
-        public IvParameterSpec getIvSpec(String alias, int keyLength) throws IllegalArgumentException {
+        public IvParameterSpec getIvSpec(String alias) throws IllegalArgumentException {
             try {
                 if (alias.equals("AES_V1")) {
                     byte[] ivBuffer = new byte[16]; // AES requires 16 byte => 128 bit IV
@@ -102,7 +102,7 @@ public abstract class EncryptedAttributeConverter<X> implements AttributeConvert
                 log.error("Could not initialize key for CipherFormat : {}", this.name());
             }
             try {
-                this.iv = defaultSecretLoader.getIvSpec(this.name(), this.keySize);
+                this.iv = defaultSecretLoader.getIvSpec(this.name());
             } catch (IllegalArgumentException e) {
                 log.error("Could not initialize IV for CipherFormat : {}", this.name());
             }
