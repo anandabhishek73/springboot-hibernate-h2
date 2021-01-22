@@ -25,7 +25,7 @@ public class Book extends BaseEntity {
     private String ISBN;
 
     //    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Author author;

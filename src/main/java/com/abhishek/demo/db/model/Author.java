@@ -2,11 +2,9 @@ package com.abhishek.demo.db.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 
 @Builder
@@ -23,6 +21,8 @@ public class Author extends BaseEntity {
     @Column(name = "dob")
     private Date dob;
 
+    private String accountNumber;
+
 //    @Transient
 //    private transient Date age;
 //
@@ -30,6 +30,6 @@ public class Author extends BaseEntity {
 //        return new Date(new Date().compareTo(age));
 //    }
 
-//    @OneToMany(mappedBy = "author")
-//    Set<Book> books;
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Set<Book> books;
 }

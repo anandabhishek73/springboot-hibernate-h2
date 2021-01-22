@@ -1,5 +1,8 @@
 package com.abhishek.demo.db.repository;
 
+import com.abhishek.demo.db.projections.AuthorClassProjectionView;
+import com.abhishek.demo.db.projections.AuthorView;
+import com.abhishek.demo.db.projections.BookView;
 import com.abhishek.demo.db.model.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -8,11 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.crossstore.ChangeSetPersister;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -83,6 +87,31 @@ class BookRepositoryIntegrationTest {
         log.info("My Book After " + book);
 
         assertThat(book.getVersion()).isEqualTo(version + 1);
+    }
+
+    @Test
+    @Transactional
+    public void whenSearchByAuthorName_thenCorrectBookShouldReturn(){
+//        List<BookView> books = bookRepository.findByAuthor_FirstName("Abhishek");
+//        assertThat(books.stream()
+//                .map(BookView::getAuthor)
+//                .map(AuthorView::getFirstName)
+//                .collect(Collectors.toList())
+//        ).contains("Abhishek");
+
+//        assertThat(books.stream()
+//                .map(BookView::getAuthorFirstName)
+//                .collect(Collectors.toList())
+//        ).contains("Abhishek");
+    }
+
+    @Test
+    public void whenUsingClassBasedProjections_thenDtoWithRequiredPropertiesIsReturned() {
+        List<BookView> books = bookRepository.findByAuthor_FirstName("Abhishek");
+
+        books.forEach(System.out::println);
+
+        assertThat(books).allSatisfy(book -> book.getAuthor().getFirstName().contains("Abhishek"));
     }
 
 }
