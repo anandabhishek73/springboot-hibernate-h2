@@ -1,0 +1,25 @@
+version: "3"
+services:
+  demo:
+    build: .
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    depends_on:
+      - demo_db
+
+  demo_db:
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ROOT_PASSWORD="pwd12345"
+    volumes:
+      - demodb:/var/lib/mysql
+
+  db_admin:
+    image: adminer
+    restart: always
+    ports:
+      - 4321:8080
+    depends_on:
+      - demo_db
