@@ -30,7 +30,7 @@ import java.time.Duration;
  * Performance Benefits : https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-performance
  */
 @Component
-public class CloudStorageClient extends BaseHttpClient{
+public class CloudStorageClient extends BaseHttpClient {
 
     private final String defaultClientName = "CKYC";
     private final String ATTRIBUTE_CLIENT_NAME = "client";
@@ -38,7 +38,8 @@ public class CloudStorageClient extends BaseHttpClient{
     @Getter
     WebClient webClient;
 
-    private CloudStorageClient(@Autowired CloudStorageClientConfig cloudStorageClientConfig) {
+    @Autowired
+    private CloudStorageClient(CloudStorageClientConfig cloudStorageClientConfig) {
         super();
 
         HttpClient httpClient = HttpClient.create()

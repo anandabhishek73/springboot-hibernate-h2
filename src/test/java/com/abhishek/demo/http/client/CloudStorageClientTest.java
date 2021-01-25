@@ -32,6 +32,6 @@ class CloudStorageClientTest {
 
     @Test
     void uploadDocument() {
-        log.info("Response is : {}", cloudStorageClient.uploadDocument(new DocumentUploadRequest.CloudDocument(), "ABCD").block());
+        log.info("Response is : {}", cloudStorageClient.uploadDocument(new DocumentUploadRequest.CloudDocument()).block());
     }
 }
